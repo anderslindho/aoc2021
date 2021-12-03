@@ -2,19 +2,8 @@
 
 from dataclasses import dataclass
 import logging
-import pathlib
 
-from ..utils import read_data
-
-MODULE_DIR = pathlib.Path(__file__).parent
-
-TEST_DATA = """\
-forward 5
-down 5
-forward 8
-up 3
-down 8
-forward 2""".split("\n")
+from ..utils import PACKAGE_DIR, read_data
 
 logger = logging.getLogger(__name__)
 
@@ -26,7 +15,7 @@ class Submarine:
     aim: int
 
 
-def calculate_position(commands: list) -> int:
+def calculate_position2(commands: list) -> tuple:
     sub = Submarine(0, 0, 0)
     for idx, cmd in enumerate(commands, 1):
         order, magnitude = cmd.split(" ")
@@ -40,21 +29,13 @@ def calculate_position(commands: list) -> int:
             sub.aim -= magnitude
         else:
             raise RuntimeError
-        logging.info(idx, cmd)
+        logging.info(f"{idx}, {cmd}")
         logging.debug(sub)
 
     return sub.horiz_pos, sub.depth
         
 
-
-def test_calculate_position():
-    dist, depth = calculate_position(TEST_DATA)
-    actual = dist * depth
-    expected = 900
-    assert actual == expected
-
-
 if __name__ == "__main__":
-    data = read_data(MODULE_DIR / "input.txt")
-    dist, depth = calculate_position(data)
+    data = read_data(PACKAGE_DIR / "day2" / "input.txt")
+    dist, depth = calculate_position2(data)
     print(dist * depth)
