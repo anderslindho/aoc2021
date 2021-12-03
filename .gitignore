@@ -1,2 +1,5 @@
+*~
+*.sw[po]
+
 .py[oc]
 venv/
