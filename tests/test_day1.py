@@ -1,3 +1,5 @@
+from aoc2021.day1.part1 import count_depth_increases
+from aoc2021.day1.part2 import count_depth_increases2
 
 TEST_DATA = """\
 199
@@ -9,12 +11,18 @@ TEST_DATA = """\
 240
 269
 260
-263"""
+263""".split(
+    "\n"
+)
 
 
 def test_part1():
-    assert False
+    actual = count_depth_increases(TEST_DATA)
+    expected = 7
+    assert actual == expected
 
 
 def test_part2():
-    assert False
+    actual = count_depth_increases2(TEST_DATA)
+    expected = 5
+    assert actual == expected

@@ -7,7 +7,9 @@ down 5
 forward 8
 up 3
 down 8
-forward 2""".split("\n")
+forward 2""".split(
+    "\n"
+)
 
 
 def test_calculate_position():

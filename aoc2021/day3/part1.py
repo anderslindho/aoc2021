@@ -1,6 +1,6 @@
 """https://adventofcode.com/2021/day/3"""
 
-from ..utils import PACKAGE_DIR, read_data, convert_strbits_to_dec
+from ..utils import PACKAGE_DIR, convert_strbits_to_dec, read_data
 
 
 def diagnostic_report(data):

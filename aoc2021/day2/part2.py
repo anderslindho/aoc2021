@@ -1,7 +1,7 @@
 """https://adventofcode.com/2021/day/2"""
 
-from dataclasses import dataclass
 import logging
+from dataclasses import dataclass
 
 from ..utils import PACKAGE_DIR, read_data
 
@@ -22,7 +22,7 @@ def calculate_position2(commands: list) -> tuple:
         magnitude = int(magnitude)
         if order == "forward":
             sub.horiz_pos += magnitude
-            sub.depth += (sub.aim * magnitude)
+            sub.depth += sub.aim * magnitude
         elif order == "down":
             sub.aim += magnitude
         elif order == "up":
@@ -33,7 +33,7 @@ def calculate_position2(commands: list) -> tuple:
         logging.debug(sub)
 
     return sub.horiz_pos, sub.depth
-        
+
 
 if __name__ == "__main__":
     data = read_data(PACKAGE_DIR / "day2" / "input.txt")

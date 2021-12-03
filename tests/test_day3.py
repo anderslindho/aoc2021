@@ -13,7 +13,9 @@ TEST_DATA = """\
 10000
 11001
 00010
-01010""".split("\n")
+01010""".split(
+    "\n"
+)
 
 
 def test_diagnostic_report():

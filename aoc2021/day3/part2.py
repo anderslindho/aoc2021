@@ -2,23 +2,9 @@
 
 import logging
 
-from ..utils import PACKAGE_DIR, read_data, convert_strbits_to_dec
+from ..utils import PACKAGE_DIR, convert_strbits_to_dec, read_data
 
 logger = logging.getLogger(__name__)
-
-TEST_DATA = """\
-00100
-11110
-10110
-10111
-10101
-01111
-00111
-11100
-10000
-11001
-00010
-01010"""
 
 
 def calculate_ratings(numbers: list, verbose: bool = False) -> tuple:
@@ -71,5 +57,5 @@ def calculate_oxygen_generator_rating(numbers: list) -> int:
 
 if __name__ == "__main__":
     data = read_data(PACKAGE_DIR / "day3" / "input.txt")
-    h2_gen_rat, co2_scrub_rat = calculate_ratings(data, True)
+    h2_gen_rat, co2_scrub_rat = calculate_ratings(data)
     print(h2_gen_rat * co2_scrub_rat)
