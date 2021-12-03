@@ -1,4 +1,6 @@
-from aoc2021.day2 import part1, part2
+import pytest
+
+from aoc2021.day2 import solve
 
 TEST_DATA = """\
 forward 5
@@ -11,13 +13,13 @@ forward 2""".split(
 )
 
 
-def test_part1():
-    actual = part1.solve(TEST_DATA)
-    expected = 150
-    assert actual == expected
-
-
-def test_part2():
-    actual = part2.solve(TEST_DATA)
-    expected = 900
+@pytest.mark.parametrize(
+    "part, expected",
+    [
+        (1, 150),
+        (2, 900),
+    ],
+)
+def test(part, expected):
+    actual = solve(part, TEST_DATA)
     assert actual == expected

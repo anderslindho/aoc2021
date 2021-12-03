@@ -1,4 +1,6 @@
-from aoc2021.day1 import part1, part2
+import pytest
+
+from aoc2021.day1 import solve
 
 TEST_DATA = """\
 199
@@ -15,13 +17,13 @@ TEST_DATA = """\
 )
 
 
-def test_part1():
-    actual = part1.solve(TEST_DATA)
-    expected = 7
-    assert actual == expected
-
-
-def test_part2():
-    actual = part2.solve(TEST_DATA)
-    expected = 5
+@pytest.mark.parametrize(
+    "part, expected",
+    [
+        (1, 7),
+        (2, 5),
+    ],
+)
+def test(part, expected):
+    actual = solve(part, TEST_DATA)
     assert actual == expected
