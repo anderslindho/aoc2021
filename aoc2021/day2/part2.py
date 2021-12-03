@@ -35,7 +35,11 @@ def calculate_position2(commands: list) -> tuple:
     return sub.horiz_pos, sub.depth
 
 
+def solve(data: list) -> int:
+    dist, depth = calculate_position2(data)
+    return dist * depth
+
+
 if __name__ == "__main__":
     data = read_data(PACKAGE_DIR / "day2" / "input.txt")
-    dist, depth = calculate_position2(data)
-    print(dist * depth)
+    print(solve(data))

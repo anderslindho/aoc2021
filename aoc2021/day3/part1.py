@@ -14,7 +14,11 @@ def diagnostic_report(data):
     return convert_strbits_to_dec(epsilon_rate), convert_strbits_to_dec(gamma_rate)
 
 
+def solve(data: list) -> int:
+    gamma_rate, epsilon_rate = diagnostic_report(data)
+    return gamma_rate * epsilon_rate
+
+
 if __name__ == "__main__":
     data = read_data(PACKAGE_DIR / "day3" / "input.txt")
-    gamma_rate, epsilon_rate = diagnostic_report(data)
-    print(gamma_rate * epsilon_rate)
+    print(solve(data))

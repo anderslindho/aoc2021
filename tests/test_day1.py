@@ -1,5 +1,4 @@
-from aoc2021.day1.part1 import count_depth_increases
-from aoc2021.day1.part2 import count_depth_increases2
+from aoc2021.day1 import part1, part2
 
 TEST_DATA = """\
 199
@@ -17,12 +16,12 @@ TEST_DATA = """\
 
 
 def test_part1():
-    actual = count_depth_increases(TEST_DATA)
+    actual = part1.solve(TEST_DATA)
     expected = 7
     assert actual == expected
 
 
 def test_part2():
-    actual = count_depth_increases2(TEST_DATA)
+    actual = part2.solve(TEST_DATA)
     expected = 5
     assert actual == expected

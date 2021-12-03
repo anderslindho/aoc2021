@@ -1,5 +1,4 @@
-from aoc2021.day2.part1 import calculate_position
-from aoc2021.day2.part2 import calculate_position2
+from aoc2021.day2 import part1, part2
 
 TEST_DATA = """\
 forward 5
@@ -12,15 +11,13 @@ forward 2""".split(
 )
 
 
-def test_calculate_position():
-    dist, depth = calculate_position(TEST_DATA)
-    actual = dist * depth
+def test_part1():
+    actual = part1.solve(TEST_DATA)
     expected = 150
     assert actual == expected
 
 
-def test_calculate_position2():
-    dist, depth = calculate_position2(TEST_DATA)
-    actual = dist * depth
+def test_part2():
+    actual = part2.solve(TEST_DATA)
     expected = 900
     assert actual == expected

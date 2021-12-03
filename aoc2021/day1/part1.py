@@ -3,7 +3,7 @@
 from ..utils import PACKAGE_DIR, read_data
 
 
-def count_depth_increases(numbers: list) -> int:
+def solve(numbers: list) -> int:
     increasing = 0
     for first, second in zip(numbers, numbers[1:]):
         if int(second) > int(first):
@@ -13,5 +13,4 @@ def count_depth_increases(numbers: list) -> int:
 
 if __name__ == "__main__":
     data = read_data(PACKAGE_DIR / "day1" / "input.txt")
-    increases = count_depth_increases(data)
-    print(increases)
+    print(solve(data))

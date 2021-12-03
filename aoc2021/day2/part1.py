@@ -19,7 +19,11 @@ def calculate_position(data: list) -> tuple:
     return pos[0], pos[1]
 
 
+def solve(data: list) -> int:
+    dist, depth = calculate_position(data)
+    return dist * depth
+
+
 if __name__ == "__main__":
     data = read_data(PACKAGE_DIR / "day2" / "input.txt")
-    dist, depth = calculate_position(data)
-    print(dist * depth)
+    print(solve(data))

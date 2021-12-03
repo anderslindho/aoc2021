@@ -3,7 +3,7 @@
 from ..utils import PACKAGE_DIR, read_data
 
 
-def count_depth_increases2(numbers: list) -> int:
+def solve(numbers: list) -> int:
     increasing = 0
     sums = [
         sum(int(x) for x in triplet)
@@ -17,5 +17,4 @@ def count_depth_increases2(numbers: list) -> int:
 
 if __name__ == "__main__":
     data = read_data(PACKAGE_DIR / "day1" / "input.txt")
-    increases = count_depth_increases2(data)
-    print(increases)
+    print(solve(data))

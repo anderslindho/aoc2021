@@ -55,7 +55,11 @@ def calculate_oxygen_generator_rating(numbers: list) -> int:
     return numbers[0]
 
 
+def solve(data: list) -> int:
+    h2_gen_rat, co2_scrub_rat = calculate_ratings(data)
+    return h2_gen_rat * co2_scrub_rat
+
+
 if __name__ == "__main__":
     data = read_data(PACKAGE_DIR / "day3" / "input.txt")
-    h2_gen_rat, co2_scrub_rat = calculate_ratings(data)
-    print(h2_gen_rat * co2_scrub_rat)
+    print(solve(data))
