@@ -5,13 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install Python3.7
+      - name: Install Python3.8
         uses: actions/setup-python@v2
         with:
-          python-version: 3.7
+          python-version: 3.8
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python3 -m pip install -r requirements.txt
       - name: Run pytest
-        run: python3 -m pytest
+        run: |
+          python3 -m pytest
