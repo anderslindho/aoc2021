@@ -34,6 +34,7 @@ TEST_DATA = [
     "part, expected",
     [
         (1, 4512),
+        (2, 1924),
     ],
 )
 def test(part, expected):

@@ -24,24 +24,49 @@ def process(boards, number) -> list:
     return [np.where(board == number, 0, board) for board in boards]
 
 
+def has_won(board) -> bool:
+    if any(np.sum(board, axis=0) == 0):
+        return True
+    elif any(np.sum(board, axis=1) == 0):
+        return True
+    else:
+        return False
+
+
 def find_winner(boards):
     for board in boards:
-        if any(np.sum(board, axis=0) == 0):
-            return board
-        elif any(np.sum(board, axis=1) == 0):
+        if has_won(board):
             return board
     return None
 
 
-def bingo(data: list) -> tuple:
+def find_last(boards):
+    unfinished = []
+    for board in boards:
+        if not has_won(board):
+            unfinished.append(board)
+    if len(unfinished) == 1:
+        return unfinished[0]
+    else:
+        return None
+
+
+def bingo(data: list, last_wins: bool = False) -> tuple:
     numbers, boards = parse(data)
+    winner = None
     for number in numbers:
-        if number == 0:
-            continue
         boards = process(boards, number)
-        winner = find_winner(boards)
-        if winner is not None:
-            break
+        if not last_wins:
+            winner = find_winner(boards)
+            if winner is not None:
+                break
+        else:
+            if winner is None:
+                winner = find_last(boards)
+            else:
+                winner = process(winner, number)
+                if has_won(winner):
+                    break
     else:
         raise RuntimeError
     return number, winner
@@ -55,6 +80,6 @@ def solve(part: int, data: list) -> int:
     if part == 1:
         return score(*bingo(data))
     elif part == 2:
-        raise NotImplementedError
+        return score(*bingo(data, last_wins=True))
     else:
         raise NotImplementedError
