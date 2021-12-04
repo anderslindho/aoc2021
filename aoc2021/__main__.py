@@ -9,7 +9,11 @@ def main(day: int):
     print(f"Day {day}")
     day = int(day)
     for part in (1, 2):
-        print(f"The solution to part {part} is: {solve(day, part, data)}")
+        try:
+            solution = solve(day, part, data)
+        except NotImplementedError:
+            solution = "Unsolved"
+        print(f"The solution to part {part} is: {solution}")
 
 
 parser = ArgumentParser()
