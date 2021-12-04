@@ -11,16 +11,9 @@ Boards = List[np.array]
 Order = List[int]
 
 
-def parse_board(data: list) -> Board:
-    return np.array([[int(x) for x in line.split()] for line in data])
-
-
 def parse_data(data: list) -> Tuple[Order, Boards]:
     numbers = [int(x) for x in data[0].split(",")]
-    boards = [
-        parse_board(data[1 + BOARD_DIMS * idx : 1 + BOARD_DIMS + BOARD_DIMS * idx])
-        for idx, _ in enumerate(data[1::BOARD_DIMS])
-    ]
+    boards = np.loadtxt(data[1:]).reshape(-1, 5, 5)
     return numbers, boards
 
 
@@ -51,6 +44,9 @@ def find_last_unfinished(boards: Boards) -> Board:
 
 
 def bingo(numbers: Order, boards: Boards, last_wins: bool = False) -> Tuple[int, Board]:
+    # TODO: Store the winners in a list instead and take either first or
+    #       last elem depending of `last_wins`.
+    #       If so, delete `find_last_unfinished`, and return idx in `find_first_winner` (to pop)
     winner = None
     for number in numbers:
         boards = mark_number(boards, number)
