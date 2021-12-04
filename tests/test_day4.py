@@ -2,6 +2,7 @@ import pytest
 
 from aoc2021.day4 import solve
 
+# we need to remove empty lines to match how "real" data is parsed
 TEST_DATA = [
     row
     for row in """\

@@ -1,17 +1,21 @@
 """https://adventofcode.com/2021/day/4"""
 
+from typing import List, Tuple
+
 import numpy as np
 
 BOARD_DIMS = 5
 
-
-def parse_board(data: list) -> np.array:
-    nbrs = [[int(x) for x in line.split()] for line in data]
-    mtrx = np.array(nbrs)
-    return mtrx
+Board = np.array
+Boards = List[np.array]
+Order = List[int]
 
 
-def parse(data: list) -> tuple:
+def parse_board(data: list) -> Board:
+    return np.array([[int(x) for x in line.split()] for line in data])
+
+
+def parse_data(data: list) -> Tuple[Order, Boards]:
     numbers = [int(x) for x in data[0].split(",")]
     boards = [
         parse_board(data[1 + BOARD_DIMS * idx : 1 + BOARD_DIMS + BOARD_DIMS * idx])
@@ -20,27 +24,22 @@ def parse(data: list) -> tuple:
     return numbers, boards
 
 
-def process(boards, number) -> list:
+def mark_number(boards: Boards, number: int) -> Boards:
     return [np.where(board == number, 0, board) for board in boards]
 
 
-def has_won(board) -> bool:
-    if any(np.sum(board, axis=0) == 0):
-        return True
-    elif any(np.sum(board, axis=1) == 0):
-        return True
-    else:
-        return False
+def has_won(board: Board) -> bool:
+    return any(np.sum(board, axis=0) == 0) or any(np.sum(board, axis=1) == 0)
 
 
-def find_winner(boards):
+def find_first_winner(boards: Boards) -> Board:
     for board in boards:
         if has_won(board):
             return board
     return None
 
 
-def find_last(boards):
+def find_last_unfinished(boards: Boards) -> Board:
     unfinished = []
     for board in boards:
         if not has_won(board):
@@ -51,20 +50,19 @@ def find_last(boards):
         return None
 
 
-def bingo(data: list, last_wins: bool = False) -> tuple:
-    numbers, boards = parse(data)
+def bingo(numbers: Order, boards: Boards, last_wins: bool = False) -> Tuple[int, Board]:
     winner = None
     for number in numbers:
-        boards = process(boards, number)
+        boards = mark_number(boards, number)
         if not last_wins:
-            winner = find_winner(boards)
+            winner = find_first_winner(boards)
             if winner is not None:
                 break
         else:
             if winner is None:
-                winner = find_last(boards)
+                winner = find_last_unfinished(boards)
             else:
-                winner = process(winner, number)
+                winner = mark_number(winner, number)
                 if has_won(winner):
                     break
     else:
@@ -72,14 +70,14 @@ def bingo(data: list, last_wins: bool = False) -> tuple:
     return number, winner
 
 
-def score(number, board) -> int:
+def score(number: Order, board: Board) -> int:
     return np.sum(board) * number
 
 
 def solve(part: int, data: list) -> int:
     if part == 1:
-        return score(*bingo(data))
+        return score(*bingo(*parse_data(data)))
     elif part == 2:
-        return score(*bingo(data, last_wins=True))
+        return score(*bingo(*parse_data(data), last_wins=True))
     else:
         raise NotImplementedError
