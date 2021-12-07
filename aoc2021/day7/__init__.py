@@ -1,11 +1,11 @@
 """https://adventofcode.com/2021/day/7"""
 
+import operator
+from functools import reduce
+
 
 def increasing_sum(val: int) -> int:
-    rv = 0
-    for i in range(1, val + 1):
-        rv += i
-    return rv
+    return reduce(operator.add, range(1, val + 1), 0)
 
 
 def find_horizontal_alignment_with_minimal_fuel_consumption(
