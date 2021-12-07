@@ -3,3 +3,5 @@
 
 .py[oc]
 venv/
+
+*.log
