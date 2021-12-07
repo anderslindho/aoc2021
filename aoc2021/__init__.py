@@ -6,6 +6,7 @@ import aoc2021.day3
 import aoc2021.day4
 import aoc2021.day5
 import aoc2021.day6
+import aoc2021.day7
 
 
 def solve(day: int, part: int, data: list) -> int:
@@ -21,6 +22,8 @@ def solve(day: int, part: int, data: list) -> int:
         return aoc2021.day5.solve(part, data)
     elif day == 6:
         return aoc2021.day6.solve(part, data)
+    elif day == 7:
+        return aoc2021.day7.solve(part, data)
     else:
         print("Not a valid choice.")
         sys.exit(-1)
